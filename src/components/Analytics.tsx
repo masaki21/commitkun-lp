@@ -28,19 +28,24 @@ export default function Analytics({ gaId }: AnalyticsProps) {
       if (!target) return;
 
       const button = target.closest("[data-cta]");
-      if (!(button instanceof HTMLElement)) return;
+      if (button instanceof HTMLElement) {
+        const variant = button.dataset.cta;
+        if (variant) {
+          const eventName =
+            variant === "top"
+              ? "click_appstore_top"
+              : variant === "mid"
+                ? "click_appstore_mid"
+                : "click_appstore_bottom";
 
-      const variant = button.dataset.cta;
-      if (!variant) return;
+          sendEvent(eventName);
+          return;
+        }
+      }
 
-      const eventName =
-        variant === "top"
-          ? "click_appstore_top"
-          : variant === "mid"
-            ? "click_appstore_mid"
-            : "click_appstore_bottom";
-
-      sendEvent(eventName);
+      const premiumButton = target.closest("[data-premium-cta]");
+      if (!(premiumButton instanceof HTMLElement)) return;
+      sendEvent("click_premium_trial");
     };
 
     let sentScroll = false;
@@ -57,6 +62,22 @@ export default function Analytics({ gaId }: AnalyticsProps) {
       }
     };
 
+    let premiumObserver: IntersectionObserver | null = null;
+    const premiumSection = document.getElementById("premium");
+    if (premiumSection) {
+      premiumObserver = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (!entry || !entry.isIntersecting) return;
+          sendEvent("view_premium_section");
+          premiumObserver?.disconnect();
+          premiumObserver = null;
+        },
+        { threshold: 0.35 }
+      );
+      premiumObserver.observe(premiumSection);
+    }
+
     window.addEventListener("click", handleClick);
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -64,6 +85,7 @@ export default function Analytics({ gaId }: AnalyticsProps) {
     return () => {
       window.removeEventListener("click", handleClick);
       window.removeEventListener("scroll", handleScroll);
+      premiumObserver?.disconnect();
     };
   }, [gaId]);
 

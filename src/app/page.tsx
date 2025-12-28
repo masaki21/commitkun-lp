@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import CtaButtons from "@/components/CtaButtons";
+import PremiumTrialCta from "@/components/PremiumTrialCta";
 
 const worries = [
   "ジムやきつい運動、厳しいダイエットは続かない",
@@ -70,6 +71,9 @@ export default function Home() {
               <p className="text-lg leading-relaxed text-[rgba(31,26,18,0.75)] sm:text-xl">
                 「いつの間にか太ってガッカリ」を防ぐための、ゆるい見守りアプリ。
                 食事は入力しません、写真でOK。責めずに、いつでもリスタート。
+              </p>
+              <p className="inline-flex w-fit rounded-full bg-[rgba(224,106,59,0.12)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-deep)]">
+                初回1ヶ月無料トライアル（プレミアム）
               </p>
             </div>
             <Suspense fallback={<div className="h-14" />}>
@@ -162,6 +166,106 @@ export default function Home() {
                 </figure>
               ))}
             </div>
+          </section>
+
+          <section id="premium" className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-2xl font-bold">
+                プレミアムで、続けやすさが“もう一段”上がります
+              </h2>
+              <p className="text-base text-[rgba(31,26,18,0.75)]">
+                初回1ヶ月は無料トライアル。責めないまま、続く仕組みだけ追加。
+              </p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <article className="flex flex-col gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xl font-bold">AIカラダプレビュー（画像生成）</h3>
+                  <p className="text-sm text-[rgba(31,26,18,0.7)]">
+                    「今」「目標」「太った場合」を並べて比較。数字よりイメージしやすい。
+                  </p>
+                </div>
+                <ul className="flex flex-col gap-2 text-sm text-[rgba(31,26,18,0.75)]">
+                  <li>全身写真を撮るだけで体型イメージを自動生成</li>
+                  <li>どこを目指すか／どこで止めたいかが分かりやすい</li>
+                  <li>Body画面で3つを並べて比較できる</li>
+                </ul>
+                <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                  <Image
+                    src="/screens/premium_body_1.png"
+                    alt="AIカラダプレビューの画面"
+                    width={1200}
+                    height={900}
+                    className="h-64 w-full object-contain bg-white"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                </div>
+              </article>
+
+              <article className="flex flex-col gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xl font-bold">今日のひとことボード（コミュニティ）</h3>
+                  <p className="text-sm text-[rgba(31,26,18,0.7)]">
+                    ランキングも比較もなし。スタンプ中心で安心して続けられる。
+                  </p>
+                </div>
+                <ul className="flex flex-col gap-2 text-sm text-[rgba(31,26,18,0.75)]">
+                  <li>1日1回の「今日のひとこと」投稿</li>
+                  <li>コメントなし／スタンプ中心で気疲れしない</li>
+                  <li>「今日もおつかれさま」「また今日から」の文化</li>
+                </ul>
+                <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                  <Image
+                    src="/screens/premium_community_1.png"
+                    alt="今日のひとことボードの画面"
+                    width={1200}
+                    height={900}
+                    className="h-64 w-full object-contain bg-white"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                </div>
+              </article>
+            </div>
+
+            <div
+              id="premium-plan"
+              className="grid gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-[var(--color-paper)] p-6 shadow-sm sm:grid-cols-[1.2fr_1fr]"
+            >
+              <div className="flex flex-col gap-3">
+                <h3 className="text-xl font-bold">プランは1種類、支払いだけ選べます</h3>
+                <p className="text-sm text-[rgba(31,26,18,0.75)]">
+                  どちらを選んでも使える機能は同じです（支払い頻度だけ）。
+                </p>
+                <ul className="text-sm text-[rgba(31,26,18,0.75)]">
+                  <li>初回1ヶ月無料トライアル</li>
+                  <li>トライアル終了後は自動課金（解約しない場合）</li>
+                </ul>
+              </div>
+              <div className="grid gap-3">
+                <div className="rounded-2xl bg-white p-4 shadow-sm">
+                  <p className="text-sm font-medium text-[rgba(31,26,18,0.6)]">
+                    月額
+                  </p>
+                  <p className="text-2xl font-bold">500円（税込）</p>
+                </div>
+                <div className="relative rounded-2xl bg-white p-4 shadow-sm">
+                  <span className="absolute right-4 top-4 rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-bold text-[rgba(31,26,18,0.8)]">
+                    おすすめ
+                  </span>
+                  <p className="text-sm font-medium text-[rgba(31,26,18,0.6)]">
+                    年額
+                  </p>
+                  <p className="text-2xl font-bold">5,000円（税込）</p>
+                </div>
+              </div>
+            </div>
+
+            <Suspense fallback={<div className="h-14" />}>
+              <PremiumTrialCta />
+            </Suspense>
           </section>
 
           <section id="faq" className="flex flex-col gap-4">
