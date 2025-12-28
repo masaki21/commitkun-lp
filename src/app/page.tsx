@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import CtaButtons from "@/components/CtaButtons";
 
 const worries = [
@@ -71,7 +72,9 @@ export default function Home() {
                 食事は入力しません。写真でOK。責めずに、いつでもリスタート。
               </p>
             </div>
-            <CtaButtons variant="top" />
+            <Suspense fallback={<div className="h-14" />}>
+              <CtaButtons variant="top" />
+            </Suspense>
           </section>
 
           <section className="rounded-3xl bg-[var(--color-paper)] px-6 py-8 shadow-sm sm:px-10">
@@ -127,7 +130,9 @@ export default function Home() {
               ))}
             </div>
             <div className="pt-2">
-              <CtaButtons variant="mid" />
+              <Suspense fallback={<div className="h-14" />}>
+                <CtaButtons variant="mid" />
+              </Suspense>
             </div>
           </section>
 
@@ -185,7 +190,9 @@ export default function Home() {
             <p className="text-base text-[rgba(31,26,18,0.75)]">
               「責めない」「続きそう」を最初の10秒で伝えます。
             </p>
-            <CtaButtons variant="bottom" />
+            <Suspense fallback={<div className="h-14" />}>
+              <CtaButtons variant="bottom" />
+            </Suspense>
           </section>
 
           <footer className="flex flex-col gap-4 border-t border-[rgba(31,26,18,0.15)] pt-8 text-sm text-[rgba(31,26,18,0.75)]">
