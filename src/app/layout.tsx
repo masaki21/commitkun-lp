@@ -7,13 +7,13 @@ import "./globals.css";
 const rounded = M_PLUS_Rounded_1c({
   variable: "--font-rounded",
   weight: ["400", "500", "700"],
-  subsets: ["latin", "japanese"],
+  subsets: ["latin"],
 });
 
 const mincho = Shippori_Mincho({
   variable: "--font-mincho",
   weight: ["400", "600", "700"],
-  subsets: ["latin", "japanese"],
+  subsets: ["latin"],
 });
 
 const siteUrl =
