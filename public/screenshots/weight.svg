@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1600" viewBox="0 0 900 1600">
+  <rect width="900" height="1600" fill="#fffaf1"/>
+  <rect x="80" y="140" width="740" height="1320" rx="48" fill="#ffffff" stroke="#f1c27a" stroke-width="6"/>
+  <text x="140" y="280" font-size="52" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#1f1a12">体重</text>
+  <text x="140" y="360" font-size="28" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#6a5a4a">安心ゾーンでゆるくチェック</text>
+  <circle cx="450" cy="620" r="180" fill="#fff3db" stroke="#e06a3b" stroke-width="10"/>
+  <text x="450" y="640" font-size="48" text-anchor="middle" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#e06a3b">安心</text>
+  <rect x="160" y="900" width="580" height="240" rx="28" fill="#ffe4c7"/>
+</svg>

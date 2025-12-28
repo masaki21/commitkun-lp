@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff3db" />
+      <stop offset="100%" stop-color="#ffe0c4" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="150" cy="120" r="120" fill="#f6b44c" opacity="0.35" />
+  <circle cx="1040" cy="520" r="160" fill="#e06a3b" opacity="0.28" />
+  <rect x="96" y="110" width="1008" height="410" rx="36" fill="#fffaf1" stroke="#f1c27a" stroke-width="3" />
+  <text x="140" y="230" font-size="64" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#1f1a12">
+    毎日1分。体重を記録するだけ。
+  </text>
+  <text x="140" y="300" font-size="30" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#5a4a3d">
+    いつでもリスタートできる、ゆるい見守りアプリ
+  </text>
+  <text x="140" y="380" font-size="34" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#e06a3b">
+    コミットくん
+  </text>
+</svg>

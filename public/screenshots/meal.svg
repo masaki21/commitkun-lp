@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1600" viewBox="0 0 900 1600">
+  <rect width="900" height="1600" fill="#fffaf1"/>
+  <rect x="80" y="140" width="740" height="1320" rx="48" fill="#ffffff" stroke="#f1c27a" stroke-width="6"/>
+  <text x="140" y="280" font-size="52" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#1f1a12">食事</text>
+  <text x="140" y="360" font-size="28" font-family="Hiragino Kaku Gothic ProN, Meiryo, sans-serif" fill="#6a5a4a">写真だけで記録</text>
+  <rect x="140" y="460" width="620" height="420" rx="36" fill="#ffe4c7"/>
+  <rect x="140" y="940" width="620" height="220" rx="28" fill="#fff3db"/>
+</svg>

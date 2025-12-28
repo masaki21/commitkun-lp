@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f2e8;
+  --foreground: #1f1a12;
+  --accent: #f6b44c;
+  --accent-deep: #e06a3b;
+  --paper: #fffaf1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-rounded);
+  --font-serif: var(--font-mincho);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1c1a17;
+    --foreground: #f6efe6;
+    --accent: #f6b44c;
+    --accent-deep: #e06a3b;
+    --paper: #2a2621;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), "Hiragino Kaku Gothic ProN", Meiryo,
+    sans-serif;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--color-accent-deep);
+  outline-offset: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
