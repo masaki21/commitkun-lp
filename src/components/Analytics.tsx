@@ -2,13 +2,19 @@
 
 import { useEffect } from "react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 type AnalyticsProps = {
   gaId: string;
 };
 
 function sendEvent(name: string) {
   if (typeof window === "undefined") return;
-  if (!("gtag" in window)) return;
+  if (typeof window.gtag !== "function") return;
 
   window.gtag("event", name);
 }
