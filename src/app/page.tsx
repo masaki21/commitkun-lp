@@ -24,11 +24,11 @@ const support = [
 ];
 
 const screenshots = [
-  { label: "Today", src: "/screenshots/today.png" },
-  { label: "体重", src: "/screenshots/weight.png" },
-  { label: "食事", src: "/screenshots/meal.png" },
-  { label: "Log", src: "/screenshots/log.png" },
-  { label: "Body", src: "/screenshots/body.png" },
+  { label: "ホーム", src: "/screenshots/today.png" },
+  { label: "体重記録", src: "/screenshots/weight.png" },
+  { label: "食事一覧", src: "/screenshots/meal.png" },
+  { label: "記録", src: "/screenshots/log.png" },
+  { label: "カラダ", src: "/screenshots/body.png" },
 ];
 
 const faqs = [
@@ -41,10 +41,10 @@ const faqs = [
     q: "何を記録？",
     a: "体重・写真・歩数・フィット感を記録します。",
   },
-  { q: "60代でも使える？", a: "読みやすいUIを想定しています。" },
+  { q: "60代でも使える？", a: "読みやすいUIで安心。" },
   { q: "歩数は自動？", a: "許可すれば自動です（OFF可）。" },
   { q: "続かなかったら？", a: "リスタート前提の設計です。" },
-  { q: "料金は？", a: "基本無料＋プレミアム予定です。" },
+  { q: "料金は？", a: "基本無料＋プレミアム機能（画像生成・コミュニティ）は有料です。" },
   {
     q: "医療アプリ？",
     a: "診断/治療目的ではありません。",
@@ -69,7 +69,7 @@ export default function Home() {
               </h1>
               <p className="text-lg leading-relaxed text-[rgba(31,26,18,0.75)] sm:text-xl">
                 「いつの間にか太ってガッカリ」を防ぐための、ゆるい見守りアプリ。
-                食事は入力しません。写真でOK。責めずに、いつでもリスタート。
+                食事は入力しません、写真でOK。責めずに、いつでもリスタート。
               </p>
             </div>
             <Suspense fallback={<div className="h-14" />}>
@@ -139,7 +139,7 @@ export default function Home() {
           <section className="rounded-3xl bg-[var(--color-paper)] px-6 py-8 shadow-sm sm:px-10">
             <h2 className="mb-4 text-2xl font-bold">スクリーンショット</h2>
             <p className="mb-6 text-base text-[rgba(31,26,18,0.75)]">
-              Today / 体重 / 食事 / Log / Body などを掲載予定。
+              ホーム / 体重記録 / 食事一覧 / 記録 / カラダ などを掲載。
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
               {screenshots.map((shot) => (
@@ -188,7 +188,7 @@ export default function Home() {
               いまからでも、ゆるく始められます。
             </h2>
             <p className="text-base text-[rgba(31,26,18,0.75)]">
-              「責めない」「続きそう」を最初の10秒で伝えます。
+              「責めない」「続きそう」を最初の10秒で体験できます。
             </p>
             <Suspense fallback={<div className="h-14" />}>
               <CtaButtons variant="bottom" />
