@@ -72,9 +72,6 @@ export default function Home() {
                 「いつの間にか太ってガッカリ」を防ぐための、ゆるい見守りアプリ。
                 食事は入力しません、写真でOK。責めずに、いつでもリスタート。
               </p>
-              <p className="inline-flex w-fit rounded-full bg-[rgba(224,106,59,0.12)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-deep)]">
-                初回1ヶ月無料トライアル（プレミアム）
-              </p>
             </div>
             <Suspense fallback={<div className="h-14" />}>
               <CtaButtons variant="top" />
@@ -143,7 +140,7 @@ export default function Home() {
           <section className="rounded-3xl bg-[var(--color-paper)] px-6 py-8 shadow-sm sm:px-10">
             <h2 className="mb-4 text-2xl font-bold">スクリーンショット</h2>
             <p className="mb-6 text-base text-[rgba(31,26,18,0.75)]">
-              ホーム / 体重記録 / 食事一覧 / 記録 / カラダ などを掲載。
+              ホーム / 体重記録 / 食事一覧 / 記録 / カラダ を掲載。
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
               {screenshots.map((shot) => (
@@ -235,12 +232,12 @@ export default function Home() {
               className="grid gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-[var(--color-paper)] p-6 shadow-sm sm:grid-cols-[1.2fr_1fr]"
             >
               <div className="flex flex-col gap-3">
-                <h3 className="text-xl font-bold">プランは1種類、支払いだけ選べます</h3>
+                <h3 className="text-xl font-bold">プランは1種類、支払い頻度だけ選べます</h3>
                 <p className="text-sm text-[rgba(31,26,18,0.75)]">
-                  どちらを選んでも使える機能は同じです（支払い頻度だけ）。
+                  どちらを選んでも使える機能は同じです（年額がお得）。
                 </p>
                 <ul className="text-sm text-[rgba(31,26,18,0.75)]">
-                  <li>初回1ヶ月無料トライアル</li>
+                  <li>初回1ヶ月無料トライアル付き</li>
                   <li>トライアル終了後は自動課金（解約しない場合）</li>
                 </ul>
               </div>
