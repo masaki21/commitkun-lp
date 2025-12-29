@@ -176,53 +176,125 @@ export default function Home() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <article className="flex flex-col gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-xl font-bold">AIカラダプレビュー（画像生成）</h3>
-                  <p className="text-sm text-[rgba(31,26,18,0.7)]">
+              <article className="flex flex-col gap-5 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-2xl font-bold leading-snug">
+                    AIカラダプレビュー（画像生成）
+                  </h3>
+                  <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
                     「今」「目標」「太った場合」を並べて比較。数字よりイメージしやすい。
                   </p>
                 </div>
-                <ul className="flex flex-col gap-2 text-sm text-[rgba(31,26,18,0.75)]">
-                  <li>全身写真を撮るだけで体型イメージを自動生成</li>
-                  <li>どこを目指すか／どこで止めたいかが分かりやすい</li>
-                  <li>Body画面で3つを並べて比較できる</li>
+                <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>全身写真を撮るだけで体型イメージを自動生成</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>どこを目指すか／どこで止めたいかが分かりやすい</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>Body画面で3つを並べて比較できる</span>
+                  </li>
                 </ul>
-                <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                  <Image
-                    src="/screens/premium_body_1.png"
-                    alt="AIカラダプレビューの画面"
-                    width={1200}
-                    height={900}
-                    className="h-64 w-full object-contain bg-white"
-                    loading="lazy"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
+                <div className="flex flex-col gap-3">
+                  <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                    <Image
+                      src="/screens/premium_body_1.png"
+                      alt="AIカラダプレビューの画面（比較）"
+                      width={1200}
+                      height={900}
+                      className="h-64 w-full object-contain bg-white"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                      <Image
+                        src="/screens/premium_body_2.png"
+                        alt="AIカラダプレビューの画面（目標）"
+                        width={1200}
+                        height={900}
+                        className="h-40 w-full object-contain bg-white"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 50vw, 25vw"
+                      />
+                    </div>
+                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                      <Image
+                        src="/screens/premium_body_3.png"
+                        alt="AIカラダプレビューの画面（変化）"
+                        width={1200}
+                        height={900}
+                        className="h-40 w-full object-contain bg-white"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 50vw, 25vw"
+                      />
+                    </div>
+                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                      <Image
+                        src="/screens/premium_body_4.png"
+                        alt="AIカラダプレビューの画面（比較2）"
+                        width={1200}
+                        height={900}
+                        className="h-40 w-full object-contain bg-white"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 50vw, 25vw"
+                      />
+                    </div>
+                  </div>
                 </div>
               </article>
 
-              <article className="flex flex-col gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-xl font-bold">今日のひとことボード（コミュニティ）</h3>
-                  <p className="text-sm text-[rgba(31,26,18,0.7)]">
+              <article className="flex flex-col gap-5 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-2xl font-bold leading-snug">
+                    今日のひとことボード（コミュニティ）
+                  </h3>
+                  <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
                     ランキングも比較もなし。スタンプ中心で安心して続けられる。
                   </p>
                 </div>
-                <ul className="flex flex-col gap-2 text-sm text-[rgba(31,26,18,0.75)]">
-                  <li>1日1回の「今日のひとこと」投稿</li>
-                  <li>コメントなし／スタンプ中心で気疲れしない</li>
-                  <li>「今日もおつかれさま」「また今日から」の文化</li>
+                <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>1日1回の「今日のひとこと」投稿</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>コメントなし／スタンプ中心で気疲れしない</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>「今日もおつかれさま」「また今日から」の文化</span>
+                  </li>
                 </ul>
-                <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                  <Image
-                    src="/screens/premium_community_1.png"
-                    alt="今日のひとことボードの画面"
-                    width={1200}
-                    height={900}
-                    className="h-64 w-full object-contain bg-white"
-                    loading="lazy"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
+                <div className="flex flex-col gap-3">
+                  <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                    <Image
+                      src="/screens/premium_community_1.png"
+                      alt="今日のひとことボードの画面（投稿）"
+                      width={1200}
+                      height={900}
+                      className="h-64 w-full object-contain bg-white"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
+                    <Image
+                      src="/screens/premium_community_2.png"
+                      alt="今日のひとことボードの画面（スタンプ）"
+                      width={1200}
+                      height={900}
+                      className="h-40 w-full object-contain bg-white"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
                 </div>
               </article>
             </div>
@@ -232,13 +304,21 @@ export default function Home() {
               className="grid gap-4 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-[var(--color-paper)] p-6 shadow-sm sm:grid-cols-[1.2fr_1fr]"
             >
               <div className="flex flex-col gap-3">
-                <h3 className="text-xl font-bold">プランは1種類、支払い頻度だけ選べます</h3>
-                <p className="text-sm text-[rgba(31,26,18,0.75)]">
+                <h3 className="text-2xl font-bold leading-snug">
+                  プランは1種類、支払い頻度だけ選べます
+                </h3>
+                <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
                   どちらを選んでも使える機能は同じです（年額がお得）。
                 </p>
-                <ul className="text-sm text-[rgba(31,26,18,0.75)]">
-                  <li>初回1ヶ月無料トライアル付き</li>
-                  <li>トライアル終了後は自動課金（解約しない場合）</li>
+                <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>初回1ヶ月無料トライアル付き</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                    <span>トライアル終了後は自動課金（解約しない場合）</span>
+                  </li>
                 </ul>
               </div>
               <div className="grid gap-3">

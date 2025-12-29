@@ -29,7 +29,7 @@ export default function CtaButtons({ variant }: CtaButtonsProps) {
   const searchParams = useSearchParams();
   const storeUrl = useMemo(() => buildStoreUrl(searchParams), [searchParams]);
 
-  const mainLabel = variant === "mid" ? "1ヶ月無料で試す" : "App Storeで見る";
+  const mainLabel = "App Storeで見る";
 
   return (
     <div className="flex flex-col items-center gap-3 sm:flex-row">
