@@ -21,7 +21,11 @@ function buildStoreUrl(params: URLSearchParams) {
   return url.toString();
 }
 
-export default function PremiumTrialCta() {
+type PremiumTrialCtaProps = {
+  label?: string;
+};
+
+export default function PremiumTrialCta({ label }: PremiumTrialCtaProps) {
   const searchParams = useSearchParams();
   const storeUrl = useMemo(() => buildStoreUrl(searchParams), [searchParams]);
 
@@ -32,7 +36,7 @@ export default function PremiumTrialCta() {
         data-premium-cta="trial"
         className="relative z-10 inline-flex h-14 w-full items-center justify-center rounded-full bg-[var(--color-accent-deep)] px-6 text-lg font-bold text-white shadow-[0_10px_20px_rgba(224,106,59,0.25)] transition hover:-translate-y-0.5 hover:bg-[#cf5a2e] sm:w-auto"
       >
-        1ヶ月無料で試す
+        {label ?? "1ヶ月無料で試す"}
       </a>
     </div>
   );

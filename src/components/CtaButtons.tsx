@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 
 type CtaButtonsProps = {
   variant: "top" | "mid" | "bottom";
+  mainLabel?: string;
+  subLabel?: string;
 };
 
 const STORE_URL =
@@ -25,11 +27,16 @@ function buildStoreUrl(params: URLSearchParams) {
   return url.toString();
 }
 
-export default function CtaButtons({ variant }: CtaButtonsProps) {
+export default function CtaButtons({
+  variant,
+  mainLabel,
+  subLabel,
+}: CtaButtonsProps) {
   const searchParams = useSearchParams();
   const storeUrl = useMemo(() => buildStoreUrl(searchParams), [searchParams]);
 
-  const mainLabel = "App Storeで見る";
+  const resolvedMainLabel = mainLabel ?? "App Storeで見る";
+  const resolvedSubLabel = subLabel ?? "使い方を見る";
 
   return (
     <div className="flex flex-col items-center gap-3 sm:flex-row">
@@ -38,14 +45,14 @@ export default function CtaButtons({ variant }: CtaButtonsProps) {
         href={storeUrl}
         className="inline-flex h-14 w-full items-center justify-center rounded-full bg-[var(--color-accent-deep)] px-6 text-lg font-bold text-white shadow-[0_10px_20px_rgba(224,106,59,0.25)] transition hover:-translate-y-0.5 hover:bg-[#cf5a2e] sm:w-auto"
       >
-        {mainLabel}
+        {resolvedMainLabel}
       </a>
       {variant === "top" && (
         <a
           href="#how"
           className="inline-flex h-14 w-full items-center justify-center rounded-full border-2 border-[var(--color-accent-deep)] px-6 text-lg font-bold text-[var(--color-accent-deep)] transition hover:bg-[rgba(224,106,59,0.08)] sm:w-auto"
         >
-          使い方を見る
+          {resolvedSubLabel}
         </a>
       )}
     </div>

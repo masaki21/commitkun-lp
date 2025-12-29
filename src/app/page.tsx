@@ -1,58 +1,45 @@
+"use client";
+
 import Image from "next/image";
-import { Suspense } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import CtaButtons from "@/components/CtaButtons";
 import PremiumTrialCta from "@/components/PremiumTrialCta";
+import { COPY, type Lang } from "@/lib/copy";
 
-const worries = [
-  "ジムやきつい運動、厳しいダイエットは続かない",
-  "食事入力が面倒で、記録アプリが続かない",
-  "気づいたら体重が増えていて、ショック…そんな未来は避けたい",
-];
-
-const solutions = [
-  "体重は安心ゾーンで判定（安心/注意/危険）",
-  "食事は写真だけ（カロリー計算なし）",
-  "歩数は自動で見守り（HealthKit）",
-  "月1で服のフィット感チェック",
-];
-
-const steps = ["体重を記録", "食事は写真でOK", "歩数は自動で反映"];
-
-const support = [
-  "責めない。いつでもリスタート。",
-  "通知でやさしく見守り。",
-  "減量モード時はモモ上げ運動。",
-];
-
-const screenshots = [
-  { label: "ホーム", src: "/screenshots/today.png" },
-  { label: "体重記録", src: "/screenshots/weight.png" },
-  { label: "食事一覧", src: "/screenshots/meal.png" },
-  { label: "記録", src: "/screenshots/log.png" },
-  { label: "カラダ", src: "/screenshots/body.png" },
-];
-
-const faqs = [
-  {
-    q: "食事制限は必要？",
-    a: "写真でゆるく記録するだけ。制限はありません。",
-  },
-  { q: "運動が苦手でも大丈夫？", a: "がんばりすぎない前提です。" },
-  {
-    q: "何を記録？",
-    a: "体重・写真・歩数・フィット感を記録します。",
-  },
-  { q: "60代でも使える？", a: "読みやすいUIで安心。" },
-  { q: "歩数は自動？", a: "許可すれば自動です（OFF可）。" },
-  { q: "続かなかったら？", a: "リスタート前提の設計です。" },
-  { q: "料金は？", a: "基本無料＋プレミアム機能（画像生成・コミュニティ）は有料です。" },
-  {
-    q: "医療アプリ？",
-    a: "診断/治療目的ではありません。",
-  },
-];
+const LANG_STORAGE_KEY = "lp_lang";
 
 export default function Home() {
+  const [lang, setLang] = useState<Lang>("ja");
+  const t = useMemo(() => COPY[lang], [lang]);
+  const screenshotAlt = (label: string) =>
+    lang === "ja" ? `${label} の画面` : `${label} screen`;
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+    if (stored === "ja" || stored === "en") {
+      setLang(stored);
+      return;
+    }
+
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith("en")) {
+      setLang("en");
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+  }, [lang]);
+
+  const handleToggleLang = () => {
+    const nextLang = lang === "ja" ? "en" : "ja";
+    setLang(nextLang);
+    window.localStorage.setItem(LANG_STORAGE_KEY, nextLang);
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "switch_lang", { lang: nextLang });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
       <div className="relative overflow-hidden">
@@ -61,27 +48,44 @@ export default function Home() {
 
         <main className="mx-auto flex w-full max-w-5xl flex-col gap-16 px-6 pb-24 pt-16 text-[17px] sm:px-10 sm:text-[18px]">
           <section className="flex flex-col gap-8">
-            <p className="inline-flex w-fit items-center rounded-full bg-[var(--color-paper)] px-4 py-2 text-sm font-medium text-[var(--color-accent-deep)] shadow-sm">
-              60代からの、ゆるい見守り
-            </p>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="inline-flex w-fit items-center rounded-full bg-[var(--color-paper)] px-4 py-2 text-sm font-medium text-[var(--color-accent-deep)] shadow-sm">
+                {t.hero.badge}
+              </p>
+              <button
+                type="button"
+                onClick={handleToggleLang}
+                className="rounded-full bg-[var(--color-accent-deep)] px-5 py-2 text-sm font-bold text-white shadow-[0_8px_18px_rgba(224,106,59,0.25)] transition hover:-translate-y-0.5 hover:bg-[#cf5a2e]"
+              >
+                日本語 / English
+              </button>
+            </div>
+            <div className="flex flex-col gap-4">
+              <p className="font-serif text-3xl font-bold text-[rgba(31,26,18,0.75)] sm:text-4xl">
+                {t.hero.title}
+              </p>
               <h1 className="font-serif text-4xl font-bold leading-tight sm:text-5xl">
-                毎日1分。体重を記録するだけ。
+                {t.hero.h1}
               </h1>
               <p className="text-lg leading-relaxed text-[rgba(31,26,18,0.75)] sm:text-xl">
-                「いつの間にか太ってガッカリ」を防ぐための、ゆるい見守りアプリ。
-                食事は入力しません、写真でOK。責めずに、いつでもリスタート。
+                {t.hero.sub[0]}
+                <br />
+                {t.hero.sub[1]}
               </p>
             </div>
             <Suspense fallback={<div className="h-14" />}>
-              <CtaButtons variant="top" />
+              <CtaButtons
+                variant="top"
+                mainLabel={t.hero.ctaMain}
+                subLabel={t.hero.ctaSub}
+              />
             </Suspense>
           </section>
 
           <section className="rounded-3xl bg-[var(--color-paper)] px-6 py-8 shadow-sm sm:px-10">
-            <h2 className="mb-6 text-2xl font-bold">こんなお悩み、ありませんか？</h2>
+            <h2 className="mb-6 text-2xl font-bold">{t.pain.title}</h2>
             <ul className="flex flex-col gap-4 text-lg leading-relaxed">
-              {worries.map((item) => (
+              {t.pain.items.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span className="mt-2 h-2 w-2 rounded-full bg-[var(--color-accent-deep)]" />
                   <span>{item}</span>
@@ -92,9 +96,9 @@ export default function Home() {
 
           <section className="grid gap-6 sm:grid-cols-2">
             <div className="rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
-              <h2 className="mb-4 text-2xl font-bold">安心できる仕組み</h2>
+              <h2 className="mb-4 text-2xl font-bold">{t.features.titleA}</h2>
               <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                {solutions.map((item) => (
+                {t.features.itemsA.map((item) => (
                   <li key={item} className="flex gap-3">
                     <span className="mt-2 h-2 w-2 rounded-full bg-[var(--color-accent)]" />
                     <span>{item}</span>
@@ -103,9 +107,9 @@ export default function Home() {
               </ul>
             </div>
             <div className="rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
-              <h2 className="mb-4 text-2xl font-bold">続く理由</h2>
+              <h2 className="mb-4 text-2xl font-bold">{t.features.titleB}</h2>
               <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                {support.map((item) => (
+                {t.features.itemsB.map((item) => (
                   <li key={item} className="flex gap-3">
                     <span className="mt-2 h-2 w-2 rounded-full bg-[var(--color-accent)]" />
                     <span>{item}</span>
@@ -116,9 +120,9 @@ export default function Home() {
           </section>
 
           <section id="how" className="flex flex-col gap-6">
-            <h2 className="text-2xl font-bold">使い方は3ステップ</h2>
+            <h2 className="text-2xl font-bold">{t.how.title}</h2>
             <div className="grid gap-4 sm:grid-cols-3">
-              {steps.map((step, index) => (
+              {t.how.steps.map((step, index) => (
                 <div
                   key={step}
                   className="rounded-2xl bg-white p-6 text-center shadow-sm"
@@ -132,25 +136,25 @@ export default function Home() {
             </div>
             <div className="pt-2">
               <Suspense fallback={<div className="h-14" />}>
-                <CtaButtons variant="mid" />
+                <CtaButtons variant="mid" mainLabel={t.hero.ctaMain} />
               </Suspense>
             </div>
           </section>
 
           <section className="rounded-3xl bg-[var(--color-paper)] px-6 py-8 shadow-sm sm:px-10">
-            <h2 className="mb-4 text-2xl font-bold">スクリーンショット</h2>
+            <h2 className="mb-4 text-2xl font-bold">{t.screenshots.title}</h2>
             <p className="mb-6 text-base text-[rgba(31,26,18,0.75)]">
-              ホーム / 体重記録 / 食事一覧 / 記録 / カラダ を掲載。
+              {t.screenshots.lead}
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
-              {screenshots.map((shot) => (
+              {t.screenshots.items.map((shot) => (
                 <figure
                   key={shot.label}
                   className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white shadow-sm"
                 >
                   <Image
                     src={shot.src}
-                    alt={`${shot.label} の画面`}
+                    alt={screenshotAlt(shot.label)}
                     width={900}
                     height={1600}
                     className="h-80 w-full object-contain bg-white"
@@ -167,11 +171,9 @@ export default function Home() {
 
           <section id="premium" className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <h2 className="text-2xl font-bold">
-                プレミアムで、続けやすさが“もう一段”上がります
-              </h2>
+              <h2 className="text-2xl font-bold">{t.premium.title}</h2>
               <p className="text-base text-[rgba(31,26,18,0.75)]">
-                初回1ヶ月は無料トライアル。責めないまま、続く仕組みだけ追加。
+                {t.premium.lead}
               </p>
             </div>
 
@@ -179,31 +181,25 @@ export default function Home() {
               <article className="flex flex-col gap-5 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
                 <div className="flex flex-col gap-3">
                   <h3 className="text-2xl font-bold leading-snug">
-                    AIカラダプレビュー（画像生成）
+                    {t.premium.featA.title}
                   </h3>
                   <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                    「今」「目標」「太った場合」を並べて比較。数字よりイメージしやすい。
+                    {t.premium.featA.lead}
                   </p>
                 </div>
                 <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>全身写真を撮るだけで体型イメージを自動生成</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>どこを目指すか／どこで止めたいかが分かりやすい</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>Body画面で3つを並べて比較できる</span>
-                  </li>
+                  {t.premium.featA.items.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="flex flex-col gap-3">
                   <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
                     <Image
-                      src="/screens/premium_body_1.png"
-                      alt="AIカラダプレビューの画面（比較）"
+                      src={t.premium.featA.images.main}
+                      alt="AIカラダプレビューの画面"
                       width={1200}
                       height={900}
                       className="h-64 w-full object-contain bg-white"
@@ -212,39 +208,22 @@ export default function Home() {
                     />
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                      <Image
-                        src="/screens/premium_body_2.png"
-                        alt="AIカラダプレビューの画面（目標）"
-                        width={1200}
-                        height={900}
-                        className="h-40 w-full object-contain bg-white"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
-                    </div>
-                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                      <Image
-                        src="/screens/premium_body_3.png"
-                        alt="AIカラダプレビューの画面（変化）"
-                        width={1200}
-                        height={900}
-                        className="h-40 w-full object-contain bg-white"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
-                    </div>
-                    <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                      <Image
-                        src="/screens/premium_body_4.png"
-                        alt="AIカラダプレビューの画面（比較2）"
-                        width={1200}
-                        height={900}
-                        className="h-40 w-full object-contain bg-white"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
-                    </div>
+                    {t.premium.featA.images.sub.map((src, index) => (
+                      <div
+                        key={`${src}-${index}`}
+                        className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white"
+                      >
+                        <Image
+                          src={src}
+                          alt="AIカラダプレビューの画面"
+                          width={1200}
+                          height={900}
+                          className="h-40 w-full object-contain bg-white"
+                          loading="lazy"
+                          sizes="(max-width: 640px) 50vw, 25vw"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </article>
@@ -252,31 +231,25 @@ export default function Home() {
               <article className="flex flex-col gap-5 rounded-3xl border border-[rgba(31,26,18,0.08)] bg-white p-6 shadow-sm">
                 <div className="flex flex-col gap-3">
                   <h3 className="text-2xl font-bold leading-snug">
-                    今日のひとことボード（コミュニティ）
+                    {t.premium.featB.title}
                   </h3>
                   <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                    ランキングも比較もなし。スタンプ中心で安心して続けられる。
+                    {t.premium.featB.lead}
                   </p>
                 </div>
                 <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>1日1回の「今日のひとこと」投稿</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>コメントなし／スタンプ中心で気疲れしない</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>「今日もおつかれさま」「また今日から」の文化</span>
-                  </li>
+                  {t.premium.featB.items.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="flex flex-col gap-3">
                   <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
                     <Image
-                      src="/screens/premium_community_1.png"
-                      alt="今日のひとことボードの画面（投稿）"
+                      src={t.premium.featB.images.main}
+                      alt="今日のひとことボードの画面"
                       width={1200}
                       height={900}
                       className="h-64 w-full object-contain bg-white"
@@ -284,17 +257,26 @@ export default function Home() {
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white">
-                    <Image
-                      src="/screens/premium_community_2.png"
-                      alt="今日のひとことボードの画面（スタンプ）"
-                      width={1200}
-                      height={900}
-                      className="h-40 w-full object-contain bg-white"
-                      loading="lazy"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                  </div>
+                  {t.premium.featB.images.sub.length > 0 && (
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {t.premium.featB.images.sub.map((src, index) => (
+                        <div
+                          key={`${src}-${index}`}
+                          className="overflow-hidden rounded-2xl border border-[rgba(31,26,18,0.12)] bg-white"
+                        >
+                          <Image
+                            src={src}
+                            alt="今日のひとことボードの画面"
+                            width={1200}
+                            height={900}
+                            className="h-40 w-full object-contain bg-white"
+                            loading="lazy"
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </article>
             </div>
@@ -305,50 +287,52 @@ export default function Home() {
             >
               <div className="flex flex-col gap-3">
                 <h3 className="text-2xl font-bold leading-snug">
-                  プランは1種類、支払い頻度だけ選べます
+                  {t.premium.pricing.title}
                 </h3>
                 <p className="text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                  どちらを選んでも使える機能は同じです（年額がお得）。
+                  {t.premium.pricing.lead}
                 </p>
                 <ul className="flex flex-col gap-3 text-base leading-relaxed text-[rgba(31,26,18,0.75)]">
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>初回1ヶ月無料トライアル付き</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-                    <span>トライアル終了後は自動課金（解約しない場合）</span>
-                  </li>
+                  {t.premium.pricing.notes.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="grid gap-3">
                 <div className="rounded-2xl bg-white p-4 shadow-sm">
                   <p className="text-sm font-medium text-[rgba(31,26,18,0.6)]">
-                    月額
+                    {t.premium.pricing.monthlyLabel}
                   </p>
-                  <p className="text-2xl font-bold">500円（税込）</p>
+                  <p className="text-2xl font-bold">
+                    {t.premium.pricing.monthlyPrice}
+                  </p>
                 </div>
                 <div className="relative rounded-2xl bg-white p-4 shadow-sm">
                   <span className="absolute right-4 top-4 rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-bold text-[rgba(31,26,18,0.8)]">
-                    おすすめ
+                    {t.premium.pricing.yearlyBadge}
                   </span>
                   <p className="text-sm font-medium text-[rgba(31,26,18,0.6)]">
-                    年額
+                    {t.premium.pricing.yearlyLabel}
                   </p>
-                  <p className="text-2xl font-bold">5,000円（税込）</p>
+                  <p className="text-2xl font-bold">
+                    {t.premium.pricing.yearlyPrice}
+                  </p>
                 </div>
               </div>
             </div>
 
             <Suspense fallback={<div className="h-14" />}>
-              <PremiumTrialCta />
+              <PremiumTrialCta label={t.premium.cta.main} />
             </Suspense>
           </section>
 
           <section id="faq" className="flex flex-col gap-4">
-            <h2 className="text-2xl font-bold">よくある質問</h2>
+            <h2 className="text-2xl font-bold">{t.faq.title}</h2>
             <div className="flex flex-col gap-3">
-              {faqs.map((item) => (
+              {t.faq.items.map((item) => (
                 <details
                   key={item.q}
                   className="rounded-2xl border border-[rgba(31,26,18,0.08)] bg-white px-5 py-4"
@@ -365,28 +349,26 @@ export default function Home() {
           </section>
 
           <section className="flex flex-col items-center gap-4 rounded-3xl bg-white px-6 py-10 text-center shadow-sm">
-            <h2 className="text-2xl font-bold">
-              いまからでも、ゆるく始められます。
-            </h2>
+            <h2 className="text-2xl font-bold">{t.closing.title}</h2>
             <p className="text-base text-[rgba(31,26,18,0.75)]">
-              「責めない」「続きそう」を最初の10秒で体験できます。
+              {t.closing.lead}
             </p>
             <Suspense fallback={<div className="h-14" />}>
-              <CtaButtons variant="bottom" />
+              <CtaButtons variant="bottom" mainLabel={t.hero.ctaMain} />
             </Suspense>
           </section>
 
           <footer className="flex flex-col gap-4 border-t border-[rgba(31,26,18,0.15)] pt-8 text-sm text-[rgba(31,26,18,0.75)]">
             <div className="flex flex-wrap gap-4">
               <a href="/privacy" className="font-medium text-[rgba(31,26,18,0.8)]">
-                プライバシーポリシー
+                {t.footer.privacy}
               </a>
               <a href="/contact" className="font-medium text-[rgba(31,26,18,0.8)]">
-                お問い合わせ
+                {t.footer.contact}
               </a>
-              <span>医療行為ではありません。</span>
+              <span>{t.footer.disclaimer}</span>
             </div>
-            <p>© Commit-kun</p>
+            <p>{t.footer.copyright}</p>
           </footer>
         </main>
       </div>
