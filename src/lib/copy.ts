@@ -37,16 +37,30 @@ export const COPY = {
       ],
     },
     premium: {
-      title: "プレミアムで、続けやすさが“もう一段”上がります",
-      lead: "初回1ヶ月は無料トライアル。責めないまま、続く仕組みだけ追加。",
+      title: "コミュニティ＆チームは無料で使えます",
+      lead:
+        "同じように“ゆるく続けたい”仲間と、気持ちを共有できる居場所です。ランキングや競争はありません。",
       featA: {
-        title: "AIカラダプレビュー（画像生成）",
-        lead:
-          "「今」「目標」「太った場合」を並べて比較。数字よりイメージしやすい。",
+        title: "コミュニティ＆チーム（無料）",
+        lead: "気持ちを共有できる居場所として、無料で使えます。",
         items: [
-          "全身写真を撮るだけで体型イメージを自動生成",
-          "どこを目指すか／どこで止めたいかが分かりやすい",
-          "Body画面で3つを並べて比較できる",
+          "今日のひとことボード：気分・今日できたことを投稿＆リアクション",
+          "チーム機能（招待制・完全プライベート）：友達同士で励まし合えます",
+          "チームチャット（テキスト）：チーム内で会話できます（1チームまで無料）",
+        ],
+        images: {
+          main: "/screens/premium_community_1.png",
+          sub: ["/screens/premium_community_2.png"],
+        },
+      },
+      featB: {
+        title: "AIカラダプレビュー（1回500円）",
+        lead:
+          "全身写真からAIが「理想の体型」「太った場合の体型」の2枚を生成します。",
+        items: [
+          "1回で2枚生成（理想／太った場合）",
+          "「今・理想・太った場合」を見比べて方向性をイメージ",
+          "必要なときだけ購入できます",
         ],
         images: {
           main: "/screens/premium_body_1.png",
@@ -57,34 +71,24 @@ export const COPY = {
           ],
         },
       },
-      featB: {
-        title: "今日のひとことボード（コミュニティ）",
-        lead: "ランキングも比較もなし。スタンプ中心で安心して続けられる。",
-        items: [
-          "1日1回の「今日のひとこと」投稿",
-          "コメントなし／スタンプ中心で気疲れしない",
-          "「今日もおつかれさま」「また今日から」の文化",
-        ],
-        images: {
-          main: "/screens/premium_community_1.png",
-          sub: ["/screens/premium_community_2.png"],
-        },
-      },
       pricing: {
-        title: "プランは1種類、支払い頻度だけ選べます",
-        lead: "どちらを選んでも使える機能は同じです（年額がお得）。",
+        title: "追加できる機能（アプリ内課金／都度課金）",
+        lead: "必要なときだけ購入できる仕組みです。",
         notes: [
-          "初回1ヶ月無料トライアル付き",
-          "トライアル終了後は自動課金（解約しない場合）",
+          "追加機能は App Store のアプリ内課金で購入できます",
+          "AIプレビュー：1回500円（1回で2枚生成）",
+          "チーム枠 +5：500円",
+          "価格は国や地域により異なる場合があります",
+          "返金・キャンセルの可否は App Store の規定に従います",
         ],
-        monthlyLabel: "月額",
-        monthlyPrice: "500円（税込）",
-        yearlyLabel: "年額",
-        yearlyPrice: "5,000円（税込）",
-        yearlyBadge: "おすすめ",
+        monthlyLabel: "AIカラダプレビュー（1回）",
+        monthlyPrice: "500円",
+        yearlyLabel: "チーム枠 +5",
+        yearlyPrice: "500円",
+        yearlyBadge: "追加",
       },
       cta: {
-        main: "1ヶ月無料で試す",
+        main: "App Storeで見る",
       },
     },
     how: {
@@ -161,7 +165,7 @@ export const COPY = {
         { q: "続かなかったら？", a: "リスタート前提の設計です。" },
         {
           q: "料金は？",
-          a: "基本無料＋プレミアム機能（画像生成・コミュニティ）は有料です。",
+          a: "基本機能・コミュニティ・1チームまでのチーム機能は無料です。追加したい場合のみ、AIカラダプレビュー（1回500円）やチーム枠+5（500円）を都度購入できます。",
         },
         { q: "医療アプリ？", a: "診断/治療目的ではありません。" },
       ],
@@ -203,15 +207,30 @@ export const COPY = {
       ],
     },
     premium: {
-      title: "Premium makes it even easier to keep going",
-      lead: "First month is free. Just add the helpful parts—no pressure.",
+      title: "Community & Teams are free to use",
+      lead:
+        "A place to share feelings with others who want to keep it gentle. No rankings or competition.",
       featA: {
-        title: "AI Body Preview (image generation)",
-        lead: "Compare “now,” “goal,” and “if I gain.” Easier than numbers.",
+        title: "Community & Teams (free)",
+        lead: "A supportive space you can use for free.",
         items: [
-          "Generate body images from a single full-body photo",
-          "See where you want to aim and where you want to stop",
-          "Compare all three side‑by‑side in the Body screen",
+          "Today’s One‑Word Board: post your mood and small wins",
+          "Team feature (invite‑only, private): encourage each other with friends",
+          "Team chat (text): talk inside your team (1 team free)",
+        ],
+        images: {
+          main: "/screens/premium_community_1.png",
+          sub: ["/screens/premium_community_2.png"],
+        },
+      },
+      featB: {
+        title: "AI Body Preview (¥500 per use)",
+        lead:
+          "AI generates two images from a full‑body photo: ideal shape and if you gain.",
+        items: [
+          "Two images per purchase (ideal / if you gain)",
+          "Compare “now, ideal, if you gain” to picture direction",
+          "Buy only when you need it",
         ],
         images: {
           main: "/screens/premium_body_1.png",
@@ -222,34 +241,24 @@ export const COPY = {
           ],
         },
       },
-      featB: {
-        title: "Today’s One‑Word Board (community)",
-        lead: "No rankings, no comparisons. Just warm, stamp‑first support.",
-        items: [
-          "Post one short update each day",
-          "No comments—just stamps, so it feels light",
-          "A culture of “Good job today” and “Starting again”",
-        ],
-        images: {
-          main: "/screens/premium_community_1.png",
-          sub: ["/screens/premium_community_2.png"],
-        },
-      },
       pricing: {
-        title: "One plan. Choose your billing frequency.",
-        lead: "Same features either way (annual saves money).",
+        title: "Optional add‑ons (in‑app, pay‑as‑you‑go)",
+        lead: "Purchase only when you need them.",
         notes: [
-          "1‑month free trial included",
-          "Auto‑renew after trial unless canceled",
+          "Add‑ons are purchased via App Store in‑app purchase",
+          "AI Preview: ¥500 per use (2 images per purchase)",
+          "Team slots +5: ¥500",
+          "Prices may vary by country/region",
+          "Refunds and cancellations follow App Store policy",
         ],
-        monthlyLabel: "Monthly",
-        monthlyPrice: "¥500 (tax included)",
-        yearlyLabel: "Yearly",
-        yearlyPrice: "¥5,000 (tax included)",
-        yearlyBadge: "Best value",
+        monthlyLabel: "AI Body Preview (one‑time)",
+        monthlyPrice: "¥500",
+        yearlyLabel: "Team slots +5",
+        yearlyPrice: "¥500",
+        yearlyBadge: "Add‑on",
       },
       cta: {
-        main: "Start 1‑month free trial",
+        main: "View on the App Store",
       },
     },
     how: {
@@ -326,7 +335,7 @@ export const COPY = {
         { q: "What if I stop?", a: "You can restart anytime." },
         {
           q: "Is there a fee?",
-          a: "Free to start. Premium features are paid.",
+          a: "Core features, community, and one team are free. If you want more, you can buy AI Body Preview (¥500 per use) or Team slots +5 (¥500) as needed.",
         },
         { q: "Is this a medical app?", a: "No medical diagnosis or treatment." },
       ],
